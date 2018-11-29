@@ -675,11 +675,6 @@ a:hover {
   color: rgba(0, 0, 0, 0.87);
 }
 
-::-moz-selection {
-  background-color: #CCE2FF;
-  color: rgba(0, 0, 0, 0.87);
-}
-
 ::selection {
   background-color: #CCE2FF;
   color: rgba(0, 0, 0, 0.87);
@@ -689,12 +684,6 @@ a:hover {
 
 textarea::-webkit-selection,
 input::-webkit-selection {
-  background-color: rgba(100, 100, 100, 0.4);
-  color: rgba(0, 0, 0, 0.87);
-}
-
-textarea::-moz-selection,
-input::-moz-selection {
   background-color: rgba(100, 100, 100, 0.4);
   color: rgba(0, 0, 0, 0.87);
 }
@@ -35628,6 +35617,7 @@ a.ui.nag {
   position: relative;
   display: block;
   max-width: 100%;
+  overflow-x: hidden;
   border: none;
   margin: 1em 0em 2.5em;
   -webkit-box-shadow: none;
