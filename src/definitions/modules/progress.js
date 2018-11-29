@@ -137,10 +137,8 @@ $.fn.progress = function(parameters) {
               module.set.value(data.value);
               module.set.progress(data.value);
             }
-            if(data.loading) {
-              module.debug('Loading loop set from metadata', data.loading);
-              module.set.loading(data.loading);
-            }
+            module.debug('Loading loop set from metadata', data.loading);
+            module.set.loading(data.loading);
           },
           settings: function() {
             if(settings.total !== false) {
@@ -156,10 +154,8 @@ $.fn.progress = function(parameters) {
               module.debug('Current percent set in settings', settings.percent);
               module.set.percent(settings.percent);
             }
-            if(settings.loading !== false) {
-              module.debug('Loading loop set in settings', settings.loading);
-              module.set.loading(settings.loading);
-            }
+            module.debug('Loading loop set in settings', settings.loading);
+            module.set.loading(settings.loading);
           }
         },
 
@@ -394,6 +390,7 @@ $.fn.progress = function(parameters) {
             delete module.total;
             delete module.percent;
             delete module.value;
+            delete module.offset;
           },
           active: function() {
             module.verbose('Removing active state');
@@ -414,6 +411,7 @@ $.fn.progress = function(parameters) {
           loading: function() {
             module.verbose('Removing loading state');
             $module.removeClass(className.loading);
+            module.set.loadingInterval();
           },
         },
 
@@ -495,8 +493,13 @@ $.fn.progress = function(parameters) {
           },
           loading: function(loading) {
             module.debug('Setting loading state');
-            if(settings.showActivity && !module.is.loading() ) {
-              $module.addClass(className.loading);
+            loading = loading || module.is.loading();
+            if(settings.showActivity) {
+              if(loading) {
+                $module.addClass(className.loading);
+              } else {
+                module.remove.loading();
+              }
             }
             module.remove.warning();
             module.remove.error();
@@ -603,7 +606,6 @@ $.fn.progress = function(parameters) {
             module.remove.warning();
             module.remove.error();
             module.remove.success();
-            module.remove.loading();
             text = settings.onLabelUpdate('active', text, module.value, module.total);
             if(text) {
               module.set.label(text);

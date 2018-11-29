@@ -26,7 +26,6 @@
   position: relative;
   display: block;
   max-width: 100%;
-  overflow-x: hidden;
   border: @border;
   margin: @margin;
   box-shadow: @boxShadow;
@@ -259,6 +258,18 @@
     opacity: 0;
     width: 100%;
   }
+}
+
+/*--------------
+    Loading
+---------------*/
+
+.ui.loading.progress {
+  overflow: hidden;
+}
+
+.ui.loading.progress > .label {
+  display: block;
 }
 
 /*--------------
